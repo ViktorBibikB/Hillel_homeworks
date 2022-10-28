@@ -12,7 +12,7 @@ public class Car {
     }
 
     private void startCommand() {
-        System.out.println("Start command.");
+        System.out.println("Start  command.");
     }
 
     private void startFuelSystem() {
