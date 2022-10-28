@@ -1,4 +1,6 @@
 .idea
 .test
+.gitignore
 target/
 HW_03.iml
+pom.xml
