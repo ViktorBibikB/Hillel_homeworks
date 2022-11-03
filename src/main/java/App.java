@@ -13,6 +13,7 @@ public class App {
         animals.add(new Cat("Cat3"));
         animals.add(new Dog("Dog1"));
         animals.add(new Cat("Cat2"));
+        animals.add(new Cat("Cat2"));
 
         for (Animal animal : animals) {
             animal.run((Math.random() * 150) + 1);

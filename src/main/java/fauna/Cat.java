@@ -16,9 +16,10 @@ public class Cat extends Animal {
     }
 
     public void swim(double distance) {
-        if (distance >= 0.0 || distance < 0.0)
+        if (distance >= 0.0 || distance < 0.0) {
             System.out.println("Cats can't swim any distance.");
-        System.out.println("Cat swam distance - " + distance);
+            return;
+        }
     }
 
     public static int getInstanceCount() {
