@@ -9,7 +9,7 @@ abstract class Animal{
 
     +{abstract} run(distance: double) : void
     +{abstract} swim(distance: double) : void
-    +{static} int instanceCount()
+    +{static} int getInstanceCount()
 }
 note right of Animal::instanceCount
   Animals counter
@@ -21,7 +21,7 @@ class Cat{
 
     +run(distance: double) : void
     +swim(distance: double) : void
-    +{static} int instanceCount()
+    +{static} int getInstanceCount()
 }
 note right of Cat::instanceCount
   Cats counter
@@ -33,7 +33,7 @@ class Dog{
 
     +run(distance: double) : void
     +swim(distance: double) : void
-    +{static} int instanceCount()
+    +{static} int getInstanceCount()
 }
 note left of Dog::instanceCount
   Dogs counter
