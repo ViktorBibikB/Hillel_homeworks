@@ -1,0 +1,44 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+abstract class Animal{
+    #String : name
+    -double : distance
+    -{static} int : instanceCount
+
+    +{abstract} run(distance: double) : void
+    +{abstract} swim(distance: double) : void
+    +{static} int instanceCount()
+}
+note right of Animal::instanceCount
+  Animals counter
+end note
+
+
+class Cat{
+    -{static} int instanceCount
+
+    +run(distance: double) : void
+    +swim(distance: double) : void
+    +{static} int instanceCount()
+}
+note right of Cat::instanceCount
+  Cats counter
+end note
+
+
+class Dog{
+    -{static} int instanceCount
+
+    +run(distance: double) : void
+    +swim(distance: double) : void
+    +{static} int instanceCount()
+}
+note left of Dog::instanceCount
+  Dogs counter
+end note
+
+Animal <|-- Cat
+Animal <|-- Dog
+@enduml
