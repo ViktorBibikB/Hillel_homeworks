@@ -40,8 +40,8 @@ class Triangle{
 
 class Application{
     +{static} main(args : String[] ) : void
-    +{static} createShapesArray(arraySize : int) : Shape[]
-    +{static} calculateShapesAreaSum(arraySize : int) : void
+    -{static} createShapesArray(arraySize : int) : Shape[]
+    -{static} calculateShapesAreaSum(arraySize : int) : void
 }
 
 class Circle implements Shape
