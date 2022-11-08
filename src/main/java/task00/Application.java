@@ -24,7 +24,7 @@ public class Application {
             if (i == 0 || i == 1)
                 shapesArray[i] = new Triangle((Math.random() * 5) + 1, (Math.random() * 10) + 1);
             else if (i % 2 == 0)
-                shapesArray[i] = new Squere((Math.random() * 8) + 1);
+                shapesArray[i] = new Square((Math.random() * 8) + 1);
             else
                 shapesArray[i] = new Circle((Math.random() * 9) + 1);
         }

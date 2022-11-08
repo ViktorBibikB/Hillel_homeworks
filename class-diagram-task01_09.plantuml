@@ -1,0 +1,66 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+abstract class Obstacle{
+    -obstacleName : String
+    -obstacleGeometry: double
+
+    +{abstract} overcome(participant : Participant ) : boolean
+
+    +getObstacleName() : String
+    +setObstacleName(obstacleName : String) : void
+    +getObstacleGeometry() : double
+    +setObstacleGeometry(obstacleLength : double) : void
+}
+
+class RunningTrack{
+    +overcome(participant : Participant) : boolean
+}
+
+class Wall{
+    +overcome(participant : Participant) : boolean
+}
+
+class Application{
+    +{static} main(args : String[] ) : void
+    -{static} passObstacle(participants : List<Participant>, obstacles : List<Obstacle>) : void
+}
+
+abstract class Participant{
+    -name : String
+    -jumpHeight: double
+    -runLength : double
+
+    +{abstract} run() : void
+    +{abstract} jump() : void
+
+    +getName() : String
+    +setName(obstacleName : String) : void
+    +getJumpHeight() : double
+    +setJumpHeight(jumpHeight : double) : void
+    +getRunLength() : double
+    +setRunLength(runLength : double) : void
+}
+
+class Cat{
+    +run() : void
+    +jump() : void
+}
+
+class Human{
+    +run() : void
+    +jump() : void
+}
+
+class Robot{
+    +run() : void
+    +jump() : void
+}
+
+Obstacle <|-- RunningTrack
+Obstacle <|-- Wall
+Participant <|-- Cat
+Participant <|-- Human
+Participant <|-- Robot
+@enduml

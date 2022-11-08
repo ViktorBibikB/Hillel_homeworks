@@ -13,7 +13,35 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="71bb930e-7b0a-4439-82bb-aedd1e536471" name="Default Changelist" comment="" />
+    <list default="true" id="71bb930e-7b0a-4439-82bb-aedd1e536471" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class-diagram-task00.plantuml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class-diagram-task01_09.plantuml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class_diagram_task00.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class_diagram_task01_09.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HW_05.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task00/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task00/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/task00/Squere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/task00/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task00/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task00/Circle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task00/Shape.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task00/Squere.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task00/Triangle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task01_09/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task01_09/obstacles/Obstacle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task01_09/obstacles/RunningTrack.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task01_09/obstacles/Wall.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task01_09/participants/Cat.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task01_09/participants/Human.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task01_09/participants/Participant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/task01_09/participants/Robot.class" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,15 +71,19 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="2HEYtylDt9kbBVwxCGTbjr5KQuR" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
@@ -111,32 +143,46 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="249" y="0" key="#Project_Structure" timestamp="1667852104269">
+    <state x="249" y="0" key="#Project_Structure" timestamp="1667902689495">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="249" y="0" key="#Project_Structure/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1667902689495" />
     <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1667852104269" />
     <state x="910" y="110" key="#com.intellij.ide.util.MemberChooser" timestamp="1667858791010">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="910" y="110" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1667858791010" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1667860757642">
+    <state x="578" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1667900497601">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1667860757642" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1667860757642">
+    <state x="578" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1667900497601" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1667903201620">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1667860757642" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1667860757641">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1667903201620" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1667899135274" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1667862235139">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1667860757641" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1667860757642">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1667862235139" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1667862235139">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1667860757642" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1667862235139" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1667862235139">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1667862235139" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1667862235139">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1667862235139" />
     <state x="277" y="0" key="SettingsEditor" timestamp="1667860154283">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

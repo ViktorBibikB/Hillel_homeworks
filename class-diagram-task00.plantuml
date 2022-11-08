@@ -1,0 +1,50 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+interface Shape{
+
+    +double area()
+}
+
+class Circle{
+    -radius : double
+    -PVALUE : double
+
+    +area() : double
+    +getRadius() : double
+    +setRadius(radius: double ) : void
+    +toString() : String
+}
+
+class Square{
+    -side : double
+
+    +area() : double
+    +getSide() : double
+    +setSide(radius: double ) : void
+    +toString() : String
+}
+
+class Triangle{
+    -side : double
+    -height : double
+
+    +area() : double
+    +getSide() : double
+    +setSide(radius: double) : void
+    +getHeight() : double
+    +setHeight(radius: double) : void
+    +toString() : String
+}
+
+class Application{
+    +{static} main(args : String[] ) : void
+    +{static} createShapesArray(arraySize : int) : Shape[]
+    +{static} calculateShapesAreaSum(arraySize : int) : void
+}
+
+class Circle implements Shape
+class Square implements Shape
+class Triangle implements Shape
+@enduml
