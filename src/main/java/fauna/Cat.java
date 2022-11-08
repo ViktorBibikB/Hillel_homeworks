@@ -8,18 +8,17 @@ public class Cat extends Animal {
         instanceCount++;
     }
 
-    public void run(double distance) {
+    public void run(double distance) throws IllegalArgumentException {
+        if (distance < 0)
+            throw new IllegalArgumentException("Cats run distance value can't be less then 0");
         if (distance > 200.0) {
-            throw new IllegalArgumentException();
-        }
-        System.out.println("Cat ran distance - " + distance);
+            System.out.println("Cats max run distance is 200.");
+        } else System.out.println("Cat ran distance - " + distance);
     }
 
-    public void swim(double distance) {
-        if (distance >= 0.0 || distance < 0.0) {
+    public void swim(double distance) throws IllegalArgumentException {
+        if (distance >= 0.0 || distance < 0.0)
             System.out.println("Cats can't swim any distance.");
-            return;
-        }
     }
 
     public static int getInstanceCount() {

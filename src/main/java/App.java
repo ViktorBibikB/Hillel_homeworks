@@ -16,7 +16,7 @@ public class App {
         animals.add(new Cat("Cat2"));
 
         for (Animal animal : animals) {
-            animal.run((Math.random() * 150) + 1);
+            animal.run((Math.random() * 600) + 1);
             animal.swim((Math.random() * 10) + 1);
         }
 
