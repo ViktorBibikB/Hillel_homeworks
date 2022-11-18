@@ -1,9 +1,11 @@
 package game;
 
+import java.util.Arrays;
+
 public class GuessTheWordGame {
     private static final String[] WORDS = {"apple", "orange", "lemon", "banana", "apricot", "avocado",
             "broccoli", "carrot", "cherry", "garlic", "grape", "melon",
-            "leek", "kiwi", "mango", "mushroom", "nut", "olive", "pea",
+            "leak", "kiwi", "mango", "mushroom", "nut", "olive", "pea",
             "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
     private final String computerWord;
 
@@ -15,6 +17,12 @@ public class GuessTheWordGame {
 
     public boolean isGuessed(String playerWord) {
         return playerWord.equals(computerWord);
+    }
+
+    public void printWordsList() {
+        System.out.println("Guess the word from list below:");
+        Arrays.sort(WORDS);
+        System.out.println(Arrays.toString(WORDS));
     }
 
     public String computeGuessedSymbols(String playerWord) {

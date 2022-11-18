@@ -9,6 +9,7 @@ public class StringMethods {
             if (array[i] == symbol)
                 count++;
         }
+        System.out.println("Current symbol " + symbol + " occurred " + count + " times.");
         return count;
     }
 

@@ -7,14 +7,14 @@ import static strings.StringMethods.*;
 public class Application {
     public static void main(String[] args) {
         findSymbolOccurance("AppOlloojo", 'o');
-        findWordPosition("Appolo", "olo");
+        System.out.println("Identity appears at position: " + findWordPosition("Appolo", "olo"));
         System.out.println(stringReverse("Hello "));
         System.out.println(isPalindrome("eRkRE"));
 
         GuessTheWordGame guessTheWord = new GuessTheWordGame();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Guess the word:");
+        guessTheWord.printWordsList();
 
         while (true) {
             String playerWord = scanner.next();
