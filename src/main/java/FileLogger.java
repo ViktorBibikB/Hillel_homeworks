@@ -54,13 +54,11 @@ public class FileLogger {
         }
 
         File file = getFile();
-        if (file.length() + messageSize < config.getFileSize()) {
-//            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
-//                bufferedWriter.write(message);
-//            } catch (IOException e) {
-//                throw new RuntimeException("Failed to write message", e);
-//            }
+        if (file.length() + messageSize < config.getSizeLimit()) {
             write(file, message);
+        } else if (config.needToCreateNewFile()) {
+            path = buildFilePath();
+            write(getFile(), message);
         } else throw new RuntimeException("File size is exceeded");
     }
 
