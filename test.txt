@@ -1,0 +1,5 @@
+FILE: test.log
+LEVEL: DEBUG
+MAX_SIZE: 1024
+FORMAT: [%s][%s][Massage: %s]%n
+NEED_TO_CREATE_NEW_FILE: true

@@ -14,18 +14,6 @@ public class FileLoggerConfigurationLoader {
     }
 
     public FileLoggerConfiguration load() {
-        Properties properties = getProperties(path);
-
-        String fileName = properties.getProperty("FILE");
-        String level = properties.getProperty( "LEVEL");
-        String maxSize = properties.getProperty( "MAX_SIZE");
-        String format = properties.getProperty( "FORMAT");
-
-        this.validateValues(fileName, level, maxSize);
-        return new FileLoggerConfiguration(fileName, LoggingLevel.valueOf(level), Integer.parseInt(maxSize), format);
-    }
-
-    private Properties getProperties(String path) {
         Properties properties = new Properties();
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path));) {
@@ -33,24 +21,13 @@ public class FileLoggerConfigurationLoader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return properties;
+
+        String fileName = properties.getProperty("FILE");
+        String level = properties.getProperty( "LEVEL");
+        String maxSize = properties.getProperty( "MAX_SIZE");
+        String format = properties.getProperty( "FORMAT");
+
+        return new FileLoggerConfiguration(fileName, LoggingLevel.valueOf(level), Integer.parseInt(maxSize), format);
     }
 
-    private void validateValues(String fileName, String level, String maxSize) {
-        if (!Path.of(fileName).toAbsolutePath().startsWith((new File("")).getAbsolutePath())) {
-            throw new RuntimeException("Path is not within project directory");
-        }
-
-        try {
-            LoggingLevel.valueOf(level);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Incorrect value at " + level + ", must be " + Arrays.toString(LoggingLevel.values()), e);
-        }
-
-        try {
-            Integer.parseInt(maxSize);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Impossible to convert " + maxSize + " to int", e);
-        }
-    }
 }

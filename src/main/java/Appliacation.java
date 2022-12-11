@@ -7,12 +7,14 @@ public class Appliacation {
 
 
     public static void main(String[] args) {
-        FileLoggerConfigurationLoader loader = new FileLoggerConfigurationLoader(PATH);
+        FileLoggerConfigurationLoader loader = new FileLoggerConfigurationLoader("test.txt");
         FileLoggerConfiguration config = loader.load();
         FileLogger fileLogger = new FileLogger(config);
         fileLogger.debug("Hello world!");
         fileLogger.debug("Hello world!");
-        fileLogger.info("info message");
+
+
+//        fileLogger.info("info message");
 //        try {
 //            Properties properties = new Properties();
 //            properties.load(new BufferedReader(new FileReader(PATH)));

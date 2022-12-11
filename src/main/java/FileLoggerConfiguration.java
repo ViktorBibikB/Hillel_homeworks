@@ -1,13 +1,13 @@
 public class FileLoggerConfiguration {
     private final String path;
     private final LoggingLevel loggingLevel;
-    private final int fileSize;
+    private final int sizeLimit;
     private final String format;
 
-    public FileLoggerConfiguration(String path, LoggingLevel loggingLevel, int fileSize, String format) {
+    public FileLoggerConfiguration(String path, LoggingLevel loggingLevel, int sizeLimit, String format) {
         this.path = path;
         this.loggingLevel = loggingLevel;
-        this.fileSize = fileSize;
+        this.sizeLimit = sizeLimit;
         this.format = format;
     }
 
@@ -19,8 +19,8 @@ public class FileLoggerConfiguration {
         return loggingLevel;
     }
 
-    public int getFileSize() {
-        return fileSize;
+    public int getSizeLimit() {
+        return sizeLimit;
     }
 
     public String getFormat() {
