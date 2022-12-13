@@ -1,4 +1,6 @@
-package logger;
+package filelogger;
+
+import logger.LoggerConfigurationLoader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,13 +11,9 @@ import java.util.Arrays;
 import java.util.Properties;
 
 public class FileLoggerConfigurationLoader {
-    private final String path;
+    private static final String path = "property.properties";
 
-    public FileLoggerConfigurationLoader(String path) {
-        this.path = path;
-    }
-
-    public FileLoggerConfiguration load() {
+    public static FileLoggerConfiguration load() {
         Properties properties = new Properties();
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path));) {
@@ -29,11 +27,11 @@ public class FileLoggerConfigurationLoader {
         String maxSize = properties.getProperty("MAX_SIZE");
         String format = properties.getProperty("FORMAT");
 
-        this.validateValues(fileName, level, maxSize);
+        validateValues(fileName, level, maxSize);
         return new FileLoggerConfiguration(fileName, LoggingLevel.valueOf(level), Integer.parseInt(maxSize), format);
     }
 
-    private void validateValues(String fileName, String level, String maxSize) {
+    private static void validateValues(String fileName, String level, String maxSize) {
         if (!Path.of(fileName).toAbsolutePath().startsWith((new File("")).getAbsolutePath())) {
             throw new RuntimeException("Path is not within project directory");
         }

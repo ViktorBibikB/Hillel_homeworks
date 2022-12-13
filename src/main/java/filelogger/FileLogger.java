@@ -1,6 +1,7 @@
-package logger;
+package filelogger;
 
 import exceptions.FileMaxSizeReachedException;
+import logger.Logger;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-public class FileLogger {
+public class FileLogger implements Logger {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss.SSS");
     private final FileLoggerConfiguration config;
     private final File file;
@@ -63,9 +64,10 @@ public class FileLogger {
             throw new FileMaxSizeReachedException("Message is too large.");
         }
 
-            if (file.length() + messageSize < config.getSizeLimit()) {
-                write(file, message);
-            } else throw new FileMaxSizeReachedException("File size is exceeded. " + " Max size is " + config.getSizeLimit() + " bytes.");
+        if (file.length() + messageSize < config.getSizeLimit()) {
+            write(file, message);
+        } else
+            throw new FileMaxSizeReachedException("File size is exceeded. Max size is " + config.getSizeLimit() + " bytes.");
 
 
     }

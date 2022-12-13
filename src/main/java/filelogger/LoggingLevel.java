@@ -1,4 +1,4 @@
-package logger;
+package filelogger;
 
 public enum LoggingLevel {
     INFO,

@@ -1,4 +1,4 @@
-package logger;
+package filelogger;
 
 public class FileLoggerConfiguration {
     private final String path;
