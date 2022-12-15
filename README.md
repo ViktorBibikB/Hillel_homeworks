@@ -8,3 +8,4 @@
 6. [Lesson_08/Home_work_08](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_08_homework_08) - Branch for Lesson 08/Home work 08.
 7. [Lesson_09/Home_work_09](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_09_homework_09) - Branch for Lesson 09/Home work 09.
 8. [Lesson_10/Home_work_10](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_10_homework_10) - Branch for Lesson 10/Home work 10.
+9. [Lesson_12/Home_work_12](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_12_homework_12) - Branch for Lesson 12/Home work 12.
