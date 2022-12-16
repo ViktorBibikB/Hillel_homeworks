@@ -16,20 +16,20 @@ public class Application {
     private static final String PATH_TEXT = "text.txt";
 
     public static void main(String[] args) {
-        PhoneBook telephoneDirectory = new PhoneBook();
+        PhoneBook phoneBook = new PhoneBook();
 
         for (Record record : createRecordListFromFile(PATH_RECORDS)) {
-            telephoneDirectory.add(record);
+            phoneBook.add(record);
         }
-        System.out.println(telephoneDirectory.toString());
+        System.out.println(phoneBook.toString());
 
-        System.out.println(telephoneDirectory.find("Viktor"));
-        System.out.println(telephoneDirectory.find("Vladyslav"));
-        System.out.println(telephoneDirectory.find("Igor"));
+        System.out.println(phoneBook.find("Viktor"));
+        System.out.println(phoneBook.find("Vladyslav"));
+        System.out.println(phoneBook.find("Igor"));
 
-        System.out.println(telephoneDirectory.findAll("Viktor"));
-        System.out.println(telephoneDirectory.findAll("Vladyslav"));
-        System.out.println(telephoneDirectory.findAll("Tetyana"));
+        System.out.println(phoneBook.findAll("Viktor"));
+        System.out.println(phoneBook.findAll("Vladyslav"));
+        System.out.println(phoneBook.findAll("Tetyana"));
 
 
 
@@ -55,7 +55,7 @@ public class Application {
     }
 
     private static void findWordCountInFile(String path, String word) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path));) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             List<String> stringList = new ArrayList<>(Arrays.asList(bufferedReader.readLine().split(" ")));
 
             countOccurance(stringList, word);
