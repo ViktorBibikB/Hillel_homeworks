@@ -27,7 +27,7 @@ public class FileNavigator {
         List<FileData> fileDataList = new ArrayList<>();
 
         for (Map.Entry<String, List<FileData>> entry : fileMap.entrySet()) {
-            for (FileData fileData : fileDataList) {
+            for (FileData fileData : entry.getValue()) {
                 if (fileData.getFileSize() >= size)
                     fileDataList.add(fileData);
             }
@@ -51,36 +51,40 @@ public class FileNavigator {
         return fileDataList;
     }
 
-    public void add_v2(String fileName) {
+    public void add_v2(String path) {
         try {
-            File file = createFile(fileName);
+            File file = createFile(path);
 
             FileData fileData = new FileData(file.getName(), (int) (Math.random() * 1024), file.getParent());
 
             if (!fileData.getFilePath().equals(file.getParent()))
-                throw new IllegalArgumentException("Path " + fileName + " does not equals fileData path: " + fileData.getFilePath());
+                throw new IllegalArgumentException("Path " + path + " does not equals fileData path: " + fileData.getFilePath());
 
-            if (fileMap.containsKey(fileName))
-                fileMap.get(fileName).add(fileData);
+            if (fileMap.containsKey(path))
+                fileMap.get(path).add(fileData);
             else {
                 List<FileData> fileDataList = new ArrayList<>();
                 fileDataList.add(fileData);
-                fileMap.put(fileName, fileDataList);
+                fileMap.put(path, fileDataList);
             }
-        } catch (FileSystemException e) {
+        } catch (FileIsDirectoryException e) {
             e.printStackTrace();
-            e.getMessage();
         }
 
 
     }
 
-    private File createFile(String fileName) throws FileSystemException {
-        File absolutePath = new File("C:\\Users\\viktor.bibik\\IdeaProjects\\Hilley\\Group_21.10.2022\\HomeWorks\\HW_13");
-        File file = new File(absolutePath + "\\" + fileName);
+    private File createFile(String path) throws FileIsDirectoryException {
+        File directory = new File(path);
+
+        if(!directory.isDirectory()){
+            directory.mkdirs();
+        }
+
+        File file = new File(directory + "\\" + "testFile.txt");
 
         if (file.isDirectory())
-            throw new FileSystemException("Instead of file was created a directory.");
+            throw new FileIsDirectoryException("Instead of file was created a directory.");
 
         if (file.exists()) {
             return file;
