@@ -1,6 +1,3 @@
-import java.io.File;
-import java.io.IOException;
-
 public class Program {
     private static final String TXT_FILE_PATH = "path\\to\\file";
     private static final String JAVA_FILE_PATH = "path\\to\\javaFile";
