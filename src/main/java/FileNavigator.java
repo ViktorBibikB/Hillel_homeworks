@@ -4,6 +4,7 @@ import java.util.*;
 
 public class FileNavigator {
     private Map<String, List<FileData>> fileMap = new LinkedHashMap<>();
+    private File file;
 
     public void add(String path, FileData fileData) {
         if (!fileData.getFilePath().equals(path))
@@ -50,37 +51,35 @@ public class FileNavigator {
         return fileDataList;
     }
 
-    public void add_v2(String path) {
+    public void add(String path) {
         try {
             File file = createFile(path);
 
-            FileData fileData = new FileData(file.getName(), (int) (Math.random() * 1024), file.getParent());
+            FileData fileData = new FileData(file.getName(), (int) file.getTotalSpace(), file.getParent());
+//            FileData fileData = new FileData(file.getName(), (int) (Math.random() * 1024), file.getParent());
 
             if (!fileData.getFilePath().equals(file.getParent()))
                 throw new IllegalArgumentException("Path " + path + " does not equals fileData path: " + fileData.getFilePath());
 
-            if (fileMap.containsKey(path))
-                fileMap.get(path).add(fileData);
+            if (fileMap.containsKey(file.getParent()))
+                fileMap.get(file.getParent()).add(fileData);
             else {
                 List<FileData> fileDataList = new ArrayList<>();
                 fileDataList.add(fileData);
-                fileMap.put(path, fileDataList);
+                fileMap.put(file.getParent(), fileDataList);
             }
         } catch (FileIsDirectoryException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private File createFile(String path) throws FileIsDirectoryException {
-        File directory = new File(path);
+        File file = new File(path);
+        File directory = new File(file.getAbsoluteFile().getParent());
 
-        if(!directory.isDirectory()){
+        if (!directory.isDirectory()) {
             directory.mkdirs();
         }
-
-        File file = new File(directory + "\\" + "testFile.txt");
 
         if (file.isDirectory())
             throw new FileIsDirectoryException("Instead of file was created a directory.");

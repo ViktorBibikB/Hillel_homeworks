@@ -1,0 +1,547 @@
+
+SELECT *
+FROM [RGCAUDB].[dbo].[counters] c
+WHERE c.counter_serial = '4633099';
+
+
+
+USE RGCAIDB;
+
+SELECT cmu.*
+	  ,cons.name
+	  ,org.name
+FROM contracts_metering_units as cmu
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN organizations org on org.id = contr.organization
+	JOIN consumers cons on cons.id = contr.consumer
+WHERE cons.edrpou = '32490244'
+	AND cmu.metering_unit_status = 1;
+
+
+
+
+WITH select_active_contracts as(
+						SELECT contr.*
+						FROM contracts AS contr
+						WHERE  isnull(contr.is_contract_active, 0)	= 1
+							AND
+									(
+										contr.end_date	>	getdate()
+											or	contr.end_date	is	null
+											or	contr.end_date	=	'1900-01-01'
+									)
+							AND
+									(
+										contr.close_date	is	null
+											or contr.close_date	>	getdate()
+											or contr.close_date	=	'1900-01-01'
+									)
+						)
+
+SELECT 'Metering units count with status - IS NOT NULL: ' + CAST(count(cmu.id) AS varchar(12)) as MU_WITH_ACTIVE_CONTRACTS
+FROM contracts_metering_units as cmu
+	JOIN metering_units mu on mu.id = cmu.metering_units
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN select_active_contracts sc on sc.id = contr.id
+WHERE cmu.metering_unit_status IS NOT NULL
+	AND cmu.is_active = 1
+	AND contr.contract_type in (6,7)
+	AND DATEDIFF(month, isnull(cmu.end_date,getdate()), GETDATE()) <= 1
+UNION ALL
+SELECT 'Metering units count with status - IS NULL: ' + CAST(count(cmu.id) AS varchar(12))
+FROM contracts_metering_units as cmu
+	JOIN metering_units mu on mu.id = cmu.metering_units
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN select_active_contracts sc on sc.id = contr.id
+WHERE cmu.metering_unit_status IS NULL
+	AND cmu.is_active = 1
+	AND contr.contract_type in (6,7)
+	AND DATEDIFF(month, isnull(cmu.end_date,getdate()), GETDATE()) <= 1
+UNION ALL
+SELECT 'Total count is: ' + CAST(count(cmu.id) AS varchar(12))
+FROM contracts_metering_units as cmu
+	JOIN metering_units mu on mu.id = cmu.metering_units
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN select_active_contracts sc on sc.id = contr.id
+WHERE cmu.is_active = 1
+	AND cmu.is_active = 1
+	AND contr.contract_type in (6,7)
+	AND DATEDIFF(month, isnull(cmu.end_date,getdate()), GETDATE()) <= 1;
+
+
+
+SELECT cmu.*
+FROM contracts_metering_units as cmu
+	JOIN metering_units mu on mu.id = cmu.metering_units
+WHERE cmu.metering_unit_status IS NULL
+	AND cmu.is_active = 1;
+
+SELECT cmu.*
+	  ,org.name
+	  ,cons.edrpou
+	  ,cons.name
+	  ,contr.contract_type
+	  ,contr.number
+	  ,contr.end_date
+	  ,contr.is_contract_active
+	  ,mu.metering_unit_1s_code
+FROM contracts_metering_units as cmu
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN organizations org on org.id = contr.organization
+	JOIN consumers cons on cons.id = contr.consumer
+	JOIN metering_units mu on mu.id = cmu.metering_units
+WHERE cmu.metering_unit_status IS NULL
+	AND cmu.is_active = 1
+	AND contr.contract_type = 6
+--	and contr.is_contract_active = 1
+	--and
+	--		(
+	--			contr.end_date	>	getdate()
+	--				or	contr.end_date	is	null
+	--				or	contr.end_date	=	'1900-01-01'
+	--		)
+	--	and
+	--		(
+	--			contr.close_date	is	null
+	--				or contr.close_date	>	getdate()
+	--				or contr.close_date	=	'1900-01-01'
+	--		)
+		and	isnull(contr.is_contract_active, 0)	= 1
+		and DATEDIFF(month, isnull(cmu.end_date,getdate()), GETDATE()) <= 1
+		and org.name like '%ЛЬВІВ%'
+		--and org.name like '%ПАТ ВІННИЦЯГАЗ%'
+		--and mu.metering_unit_1s_code = 'ЛВ0003274';
+
+
+SELECT cmu.*
+--	  ,cons.name
+	  ,org.name
+	  ,contr.number
+	  ,contr.end_date
+	  ,contr.is_contract_active
+	  ,mu.metering_unit_1s_code
+	  ,org.name
+FROM contracts_metering_units as cmu
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN organizations org on org.id = contr.organization
+--	JOIN consumers cons on cons.id = contr.consumer
+	JOIN metering_units mu on mu.id = cmu.metering_units
+WHERE cmu.metering_units = 119062;
+
+
+SELECT cmu.*
+	  ,cons.name
+	  ,org.name
+	  ,contr.number
+FROM contracts_metering_units as cmu
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN organizations org on org.id = contr.organization
+	JOIN consumers cons on cons.id = contr.consumer
+	JOIN metering_units mu on mu.id = cmu.metering_units
+WHERE mu.metering_unit_1s_code = 'ЛВ0003274';
+
+
+
+
+SELECT
+DISTINCT emp.first_name + ' ' + emp.last_name + ' ' + emp.patronymic as managers_name
+	  ,emp.email
+	  ,emp.phone
+	  ,org.name as organisation_name
+FROM RGCAIDB.dbo.consumers cons
+	JOIN RGCAIDB.dbo.contracts contr on contr.consumer = cons.id
+	JOIN RGCAIDB.dbo.employees emp on emp.id = contr.employee
+	JOIN RGCAIDB.dbo.organizations org on org.id = contr.organization
+WHERE cons.edrpou in   ( '00444932'
+						,'1857122043'
+						,'1871015280'
+						,'1890131949'
+						,'2110228901'
+						,'2117105772'
+						,'2133916221'
+						,'21884144'
+						,'21932446'
+						,'2221003300'
+						,'24245054'
+						,'24246591'
+						,'25005151'
+						,'2511905911'
+						,'25536523'
+						,'2555915154'
+						,'2603801775'
+						,'2614215763'
+						,'2623717014'
+						,'26368588'
+						,'26369903'
+						,'2650513319'
+						,'2682118707'
+						,'2699909497'
+						,'2742110106'
+						,'2797305889'
+						,'3054222494'
+						,'30643704'
+						,'31551342'
+						,'3182717027'
+						,'32410991'
+						,'33575543'
+						,'3440004523'
+						,'34545174'
+						,'34811402'
+						,'36510384'
+						,'37664427'
+						,'37664940'
+						,'38031611'
+						,'38995467'
+						,'21934267'
+						,'24600348'
+						,'31122932'
+						,'31932594'
+						,'37064541'
+						)
+ORDER BY emp.first_name + ' ' + emp.last_name + ' ' + emp.patronymic ASC;
+
+
+
+SELECT
+DISTINCT emp.first_name + ' ' + emp.last_name + ' ' + emp.patronymic as managers_name
+	  ,emp.email
+	  ,emp.phone
+	  ,org.name as organisation_name
+FROM RGCAIDB.dbo.consumers cons
+	JOIN RGCAIDB.dbo.contracts contr on contr.consumer = cons.id
+	JOIN RGCAIDB.dbo.employees emp on emp.id = contr.employee
+	JOIN RGCAIDB.dbo.organizations org on org.id = contr.organization
+WHERE cons.edrpou in   (
+						 '31932594'
+						,'24600348'
+						,'31122932'
+						,'21934267'
+						,'37064541'
+						)
+ORDER BY emp.first_name + ' ' + emp.last_name + ' ' + emp.patronymic ASC;
+
+
+SELECT
+DISTINCT emp.first_name + ' ' + emp.last_name + ' ' + emp.patronymic as managers_name
+	  ,emp.email
+	  ,emp.phone
+	  ,org.name as organisation_name
+FROM RGCAIDB.dbo.consumers cons
+	JOIN RGCAIDB.dbo.contracts contr on contr.consumer = cons.id
+	JOIN RGCAIDB.dbo.employees emp on emp.id = contr.employee
+	JOIN RGCAIDB.dbo.organizations org on org.id = contr.organization
+WHERE cons.edrpou in   ( '00444932'
+						,'1857122043'
+						,'1871015280'
+						,'1890131949'
+						,'2110228901'
+						,'2117105772'
+						,'2133916221'
+						,'21884144'
+						,'21932446'
+						,'2221003300'
+						,'24245054'
+						,'24246591'
+						,'25005151'
+						,'2511905911'
+						,'25536523'
+						,'2555915154'
+						,'2603801775'
+						,'2614215763'
+						,'2623717014'
+						,'26368588'
+						,'26369903'
+						,'2650513319'
+						,'2682118707'
+						,'2699909497'
+						,'2742110106'
+						,'2797305889'
+						,'3054222494'
+						,'30643704'
+						,'31551342'
+						,'3182717027'
+						,'32410991'
+						,'33575543'
+						,'3440004523'
+						,'34545174'
+						,'34811402'
+						,'36510384'
+						,'37664427'
+						,'37664940'
+						,'38031611'
+						,'38995467'
+						)
+ORDER BY emp.first_name + ' ' + emp.last_name + ' ' + emp.patronymic ASC;
+
+
+SELECT emp.first_name + ' ' + emp.last_name + ' ' + emp.patronymic as managers_name
+	  ,emp.email
+	  ,emp.phone
+	  ,org.name as organisation_name
+	  ,cons.edrpou as consumer_edrpou
+	  ,contr.number as contract_number
+FROM RGCAIDB.dbo.consumers cons
+	JOIN RGCAIDB.dbo.contracts contr on contr.consumer = cons.id
+	JOIN RGCAIDB.dbo.employees emp on emp.id = contr.employee
+	JOIN RGCAIDB.dbo.organizations org on org.id = contr.organization
+WHERE cons.edrpou in   ( '00444932'
+						,'1857122043'
+						,'1871015280'
+						,'1890131949'
+						,'2110228901'
+						,'2117105772'
+						,'2133916221'
+						,'21884144'
+						,'21932446'
+						,'2221003300'
+						,'24245054'
+						,'24246591'
+						,'25005151'
+						,'2511905911'
+						,'25536523'
+						,'2555915154'
+						,'2603801775'
+						,'2614215763'
+						,'2623717014'
+						,'26368588'
+						,'26369903'
+						,'2650513319'
+						,'2682118707'
+						,'2699909497'
+						,'2742110106'
+						,'2797305889'
+						,'3054222494'
+						,'30643704'
+						,'31551342'
+						,'3182717027'
+						,'32410991'
+						,'33575543'
+						,'3440004523'
+						,'34545174'
+						,'34811402'
+						,'36510384'
+						,'37664427'
+						,'37664940'
+						,'38031611'
+						,'38995467'
+						,'21934267'
+						,'24600348'
+						,'31122932'
+						,'31932594'
+						,'37064541'
+						)
+ORDER BY emp.first_name + ' ' + emp.last_name + ' ' + emp.patronymic;
+
+
+
+SELECT api.*
+FROM [dbo].[api_get_client_accounting_units_by_edrpou_v2]('00903191', 0, 100) api;
+
+SELECT *
+FROM [dbo].[api_get_client_metering_devices_by_unit_id_v2] (49864, 0, 100);
+
+SELECT *
+FROM [dbo].[api_get_client_metering_devices_last_meterage_by_meter_ids_v2]('00903191', '49864', null);
+
+SELECT *
+FROM [dbo].[api_get_client_metering_devices_meterages_by_meter_ids_v2]('00903191', '49864', 66305, 0, 100);
+
+SELECT *
+FROM [dbo].[api_get_client_metering_devices_meterages_by_meter_ids_periodic_v2]('00903191', '49864', 66305, '2021-11-01', '2022-12-31') api
+ORDER BY api.date DESC;
+
+
+SELECT *
+FROM [dbo].[api_get_client_metering_devices_by_unit_id_v2] (103729, 0, 100);
+
+
+SELECT *
+FROM [dbo].[devices_readings_history] drh
+WHERE drh.reading_source in (1,2,3,4,6)
+ORDER BY drh.date DESC;
+
+
+
+SELECT cmu.*
+FROM contracts_metering_units as cmu
+	JOIN metering_units mu on mu.id = cmu.metering_units
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN select_active_contracts sc on sc.id = contr.id
+WHERE cmu.metering_unit_status IS NULL
+	AND cmu.is_active = 1
+	AND contr.contract_type in (7)
+	AND DATEDIFF(month, isnull(cmu.end_date,getdate()), GETDATE()) <= 1;
+
+
+
+
+
+
+
+
+
+
+
+  select mu.id
+    ,mu.eic_z
+    ,mu.name
+    ,mu.address
+    ,cmu.end_date	as	status_date
+    ,case
+					when	cmu.metering_unit_status is not null
+						then	cmu.metering_unit_status
+					else	cast(cmu.is_active as int)    --https://redmine.ent.ukrgas.com.ua/issues/255127
+			end	as	status_code
+   -- ,mu.gas_pressure_category
+    ,c.id as contract_id
+    ,o.edrpou as organization_edrpou
+   --,metering_unit_1s_code    --https://redmine.ent.ukrgas.com.ua/issues/277152
+  from metering_units mu
+    join contracts_metering_units as cmu on cmu.metering_units = mu.id
+    join contracts as c on c.id=cmu.contract
+    join consumers as p on p.id=c.consumer
+    join organizations as o on o.id=c.organization
+  where ((p.edrpou = '04350910' and  c.id = ISNULL('36145',c.id))
+	or  (p.edrpou = ISNULL('04350910',p.edrpou) and c.id = '36145'))
+    and mu.metering_unit_1s_code is not null
+	and contract_type=7 and isnull(isZbut,0)=1   --https://redmine.ent.ukrgas.com.ua/issues/277152
+    and o.IsShow = 1
+		--https://redmine.ent.ukrgas.com.ua/issues/221038
+		and
+			(
+				c.end_date	>	getdate()
+					or	c.end_date	is	null
+					or	c.end_date	=	'1900-01-01'
+			)
+		and
+			(
+				c.close_date	is	null
+					or c.close_date	>	getdate()
+					or c.close_date	=	'1900-01-01'
+			)
+		and	isnull(c.is_contract_active, 0)	= 1	--активный	контракт
+	and  DATEDIFF(month, isnull(cmu.end_date,getdate()), GETDATE()) <= 1
+	and cmu.metering_unit_status  != 3
+  order by mu.id;
+
+
+
+SELECT cons.edrpou
+	  ,cons.id
+	  ,contr.contract_type
+	  --,cmu.contract
+	  ,cmu.*
+	  ,mu.metering_unit_1s_code
+FROM contracts_metering_units cmu
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN metering_units mu on mu.id = cmu.metering_units
+	JOIN consumers cons on cons.id = contr.consumer
+	join organizations as o on o.id=contr.organization
+WHERE contr.contract_type = 7
+	--and isnull(o.isZbut,0)=1
+	AND
+		(
+		        contr.end_date	>	getdate()
+			or	contr.end_date	is	null
+			or	contr.end_date	=	'1900-01-01'
+		)
+	and
+		(
+				contr.close_date	is	null
+			or  contr.close_date	>	getdate()
+			or  contr.close_date	=	'1900-01-01'
+		)
+	and	isnull(contr.is_contract_active,	0)	=	1
+	and mu.metering_unit_1s_code is not null
+	and DATEDIFF(month, isnull(cmu.end_date,getdate()), GETDATE()) <= 1
+	--and cmu.metering_unit_status  != 3
+	and isnull(cmu.metering_unit_status, 0)  != 3;
+
+
+SELECT *
+FROM organizations org
+WHERE ISNULL(org.isZbut, 0) = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+WITH select_active_contracts as(
+						SELECT contr.*
+						FROM contracts AS contr
+						WHERE  isnull(contr.is_contract_active, 0)	= 1
+							AND
+									(
+										contr.end_date	>	getdate()
+											or	contr.end_date	is	null
+											or	contr.end_date	=	'1900-01-01'
+									)
+							AND
+									(
+										contr.close_date	is	null
+											or contr.close_date	>	getdate()
+											or contr.close_date	=	'1900-01-01'
+									)
+						)
+
+
+SELECT cmu.*
+FROM contracts_metering_units as cmu
+	JOIN metering_units mu on mu.id = cmu.metering_units
+	JOIN contracts contr on contr.id = cmu.contract
+	JOIN select_active_contracts sc on sc.id = contr.id
+WHERE cmu.metering_unit_status IS NULL
+	AND cmu.is_active = 1
+	AND contr.contract_type in (6)
+	AND DATEDIFF(month, isnull(cmu.end_date,getdate()), GETDATE()) <= 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT acc.cityid
+	  ,acc.account_no
+	  ,c.counter_serial
+FROM [RGCAUDB].[dbo].[account] acc
+	JOIN [RGCAUDB].[dbo].[counters] c on c.account = acc.account_no
+	JOIN [dbo].[gas_city_i18n] gs on gs.id = acc.cityid
+WHERE c.id_pat = 34;
+--acc.EDRPOU_pat = '03349039';
+
+SELECT acc.cityid
+	  ,acc.account_no
+	  ,c.counter_serial
+FROM [RGCAUDB].[dbo].[account] acc
+	JOIN [RGCAUDB].[dbo].[counters] c on c.account = acc.account_no
+	JOIN [dbo].[gas_city_i18n] gs on gs.id = acc.cityid
+WHERE gs.id = 34;
+
+USE RGCAIDB;
+
+SELECT contr.*
+FROM contracts contr
+WHERE contr.number = '41AP797-17-22';
