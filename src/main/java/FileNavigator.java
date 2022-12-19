@@ -20,7 +20,8 @@ public class FileNavigator {
     }
 
     public List<FileData> find(String path) {
-        return fileMap.get(path);
+        File file = new File(path).getAbsoluteFile();
+        return fileMap.get(file.getAbsolutePath());
     }
 
     public List<FileData> filterBySize(int size) {
@@ -37,7 +38,8 @@ public class FileNavigator {
     }
 
     public void remove(String path) {
-        fileMap.remove(path);
+        File file = new File(path).getAbsoluteFile();
+        fileMap.remove(file.getAbsolutePath());
     }
 
     public List<FileData> sortBySize() {
@@ -55,8 +57,8 @@ public class FileNavigator {
         try {
             File file = createFile(path);
 
-            FileData fileData = new FileData(file.getName(), (int) file.getTotalSpace(), file.getParent());
-//            FileData fileData = new FileData(file.getName(), (int) (Math.random() * 1024), file.getParent());
+            FileData fileData = new FileData(file.getName(), (int) file.length(), file.getParent());
+
             if (!fileData.getFilePath().equals(file.getParent()))
                 throw new IllegalArgumentException("Path " + path + " does not equals fileData path: " + fileData.getFilePath());
 
@@ -73,7 +75,7 @@ public class FileNavigator {
     }
 
     private File createFile(String path) throws FileIsDirectoryException {
-        File file = new File(path);
+        File file = new File(path).getAbsoluteFile();
         File directory = new File(file.getAbsoluteFile().getParent());
 
         if (!directory.isDirectory()) {
