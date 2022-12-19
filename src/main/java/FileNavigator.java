@@ -57,7 +57,6 @@ public class FileNavigator {
 
             FileData fileData = new FileData(file.getName(), (int) file.getTotalSpace(), file.getParent());
 //            FileData fileData = new FileData(file.getName(), (int) (Math.random() * 1024), file.getParent());
-
             if (!fileData.getFilePath().equals(file.getParent()))
                 throw new IllegalArgumentException("Path " + path + " does not equals fileData path: " + fileData.getFilePath());
 
