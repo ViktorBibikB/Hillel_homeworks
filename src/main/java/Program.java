@@ -12,7 +12,7 @@ public class Program {
         fileNavigator.add("home\\hillel\\files\\test4.txt");
 
         System.out.println(fileNavigator.find("home\\hillel\\files"));
-        System.out.println(fileNavigator.filterBySize(15));
+        System.out.println(fileNavigator.filterBySize(14340));
         System.out.println(fileNavigator.sortBySize());
         fileNavigator.remove("home\\hillel\\files");
         System.out.println(fileNavigator.find("home\\hillel\\files"));
