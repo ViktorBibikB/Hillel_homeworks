@@ -1,6 +1,6 @@
 package algorithm;
 
-public class QuickSortRecursive {
+public class QuickSortImproved {
 
     public static void recQuickSort(int[] arr, int left, int right) {
         if (right - left <= 0)

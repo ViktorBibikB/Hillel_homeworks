@@ -1,6 +1,6 @@
 package algorithm;
 
-public class QuickSort {
+public class QuickSortBase {
     private static void swap(int[] arr, int i, int j) {
         int temp = arr[i];
         arr[i] = arr[j];

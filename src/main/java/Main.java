@@ -1,7 +1,7 @@
 import algorithm.CocktailSort;
-import algorithm.QuickSort;
+import algorithm.QuickSortBase;
 import algorithm.QuickSortWithMedian;
-import algorithm.QuickSortRecursive;
+import algorithm.QuickSortImproved;
 
 
 public class Main {
@@ -12,11 +12,11 @@ public class Main {
         QuickSortWithMedian.recQuickSort(arr, 0, arr.length - 1);
         QuickSortWithMedian.display(arr);
 
-        QuickSortRecursive.recQuickSort(arr, 0, arr.length - 1);
-        QuickSortRecursive.display(arr);
+        QuickSortImproved.recQuickSort(arr, 0, arr.length - 1);
+        QuickSortImproved.display(arr);
 
-        QuickSort.recQuickSort(arr, 0, arr.length - 1);
-        QuickSort.display(arr);
+        QuickSortBase.recQuickSort(arr, 0, arr.length - 1);
+        QuickSortBase.display(arr);
 
         CocktailSort.cocktailSortV1(arr);
         CocktailSort.display(arr);
