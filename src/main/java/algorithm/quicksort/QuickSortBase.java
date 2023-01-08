@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.quicksort;
 
 public class QuickSortBase {
     private static void swap(int[] arr, int i, int j) {

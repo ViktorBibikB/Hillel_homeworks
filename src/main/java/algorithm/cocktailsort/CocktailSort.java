@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.cocktailsort;
 
 public class CocktailSort {
     public static void cocktailSortV1(int arr[]) {

@@ -1,7 +1,7 @@
-import algorithm.CocktailSort;
-import algorithm.QuickSortBase;
-import algorithm.QuickSortWithMedian;
-import algorithm.QuickSortImproved;
+import algorithm.cocktailsort.CocktailSort;
+import algorithm.quicksort.QuickSortBase;
+import algorithm.quicksort.QuickSortWithMedian;
+import algorithm.quicksort.QuickSortImproved;
 
 
 public class Main {
