@@ -20,7 +20,7 @@ public class Main {
         orangeList.add(new Orange());
         orangeList.add(new Orange());
 
-        Box<Orange> orangeBox = new Box<>(new Orange());
+        Box<Orange> orangeBox = new Box<Orange>();
         orangeBox.addFruit(new Orange());
         orangeBox.addFruit(new Orange());
         orangeBox.addFruit(orangeList);
@@ -32,21 +32,21 @@ public class Main {
         appleList.add(new Apple());
         appleList.add(new Apple());
 
-        Box<Apple> appleBox = new Box<>(new Apple());
+        Box<Apple> appleBox = new Box<Apple>();
         appleBox.addFruit(new Apple());
         appleBox.addFruit(new Apple());
         appleBox.addFruit(appleList);
 
         System.out.println("Total apple box weight is: " + appleBox.getWeight());
 
-        Box<Apple> appleBox2 = new Box<>(new Apple());
+        Box<Apple> appleBox2 = new Box<Apple>();
         appleBox2.addFruit(new Apple());
         appleBox2.addFruit(new Apple());
         appleBox2.addFruit(appleList);
 
         System.out.println("Total apple2 box weight is: " + appleBox2.getWeight());
 
-        Box<Apple> appleBox3 = new Box<>(new Apple());
+        Box<Apple> appleBox3 = new Box<Apple>();
         appleBox3.addFruit(new Apple());
         appleBox3.addFruit(new Apple());
 
@@ -55,20 +55,21 @@ public class Main {
 
         System.out.println();
         System.out.println("orangeBox weight - " + orangeBox.getWeight() + " / appleBox weight - " + appleBox.getWeight()
-                + " = " +  orangeBox.compare(appleBox.getFruits()));
+                + " = " +  orangeBox.compare(appleBox));
         System.out.println("appleBox weight - " + appleBox.getWeight() + " / appleBox2 weight - " + appleBox2.getWeight()
-                + " = " +  appleBox.compare(appleBox2.getFruits()));
+                + " = " +  appleBox.compare(appleBox2));
         System.out.println("appleBox weight - " + appleBox.getWeight() + " / appleBo3 weight - " + appleBox3.getWeight()
-                + " = " +  appleBox.compare(appleBox3.getFruits()));
+                + " = " +  appleBox.compare(appleBox3));
 
+        System.out.println();
         System.out.println("Before merge");
-        System.out.println(appleBox.getFruits());
-        System.out.println(appleBox3.getFruits());
+        System.out.println(appleBox.getWeight());
+        System.out.println(appleBox3.getWeight());
 
-        appleBox.merge(appleBox3.getFruits());
+        appleBox.merge(appleBox3);
 
         System.out.println("After merge");
-        System.out.println(appleBox.getFruits());
-        System.out.println(appleBox3.getFruits());
+        System.out.println(appleBox.getWeight());
+        System.out.println(appleBox3.getWeight());
     }
 }

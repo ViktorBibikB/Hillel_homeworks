@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Box<T extends Fruit> {
-    T fruit;
     List<T> fruitList = new ArrayList<>();
-
-    public Box(T fruit) {
-        this.fruit = fruit;
-    }
 
     public void addFruit(T fruit) {
         fruitList.add(fruit);
@@ -19,24 +14,21 @@ public class Box<T extends Fruit> {
         fruitList.addAll(fruits);
     }
 
-    public float getWeight(){
-        return getWeight(fruitList);
+    public float getWeight() {
+        float weight = 0;
+
+        for (Fruit fruit : fruitList)
+            weight += fruit.getWeight();
+
+        return weight;
     }
 
-    private float getWeight(List<? extends Fruit> fruits){
-        return fruits.size() * fruit.getWeight();
+    public boolean compare(Box<? extends Fruit> box) {
+        return getWeight() == box.getWeight();
     }
 
-    public boolean compare(List<? extends Fruit> fruitBox){
-        return getWeight() == getWeight(fruitBox);
-    }
-
-    public void merge(List<T> fruits){
-        addFruit(fruits);
-        fruits.clear();
-    }
-
-    public List<T> getFruits(){
-        return fruitList;
+    public void merge(Box<T> fruitBox){
+        addFruit(fruitBox.fruitList);
+        fruitBox.fruitList.clear();
     }
 }
