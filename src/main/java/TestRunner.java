@@ -9,6 +9,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class TestRunner {
     private static int counterBeforeSuit;
@@ -19,7 +20,7 @@ public class TestRunner {
     private static Method[] allMethods;
 
     public static void start(Class<?> type) {
-        try{
+        try {
             object = type.getDeclaredConstructor().newInstance();
             allMethods = type.getDeclaredMethods();
 
@@ -32,17 +33,16 @@ public class TestRunner {
                     throw new IncorrectNumberOfSuitesException("\"Before suite\" annotated methods count should be equal to 1.");
             }
 
-            runMethodByAnnotation(type, BeforeSuite.class);
-            runMethodByAnnotation(type, Test.class);
-            runMethodByAnnotation(type, AfterSuite.class);
+            runMethodByAnnotation(object, BeforeSuite.class);
+            runMethodByAnnotation(object, Test.class);
+            runMethodByAnnotation(object, AfterSuite.class);
 
         } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
-            e.printStackTrace();;
+            e.printStackTrace();
         } catch (IncorrectNumberOfSuitesException e) {
             e.getMessage();
             e.printStackTrace();
         }
-
     }
 
     private static int countBeforeSuiteAnnotations(Annotation[] annotations) {
@@ -61,14 +61,37 @@ public class TestRunner {
         return counterAfterSuit;
     }
 
-    private static void runMethodByAnnotation(Class<?> type, Class<? extends Annotation> annotation) {
-        try{
-            object = type.getDeclaredConstructor().newInstance();
-            for(Method method: allMethods){
-                if(method.isAnnotationPresent(annotation))
+    private static void runMethodByAnnotation(Object type, Class<? extends Annotation> annotation) {
+        try {
+//            sortMethods(allMethods);
+            for (Method method : allMethods) {
+                if (method.isAnnotationPresent(annotation)) {
+                    if (method.isAnnotationPresent(Test.class)) {
+                        runMethods(sortMethods(allMethods));
+
+                    } else
+                    method.invoke(type);
+                }
+            }
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static List<Method> sortMethods(Method[] methods) {
+        return Arrays.stream(methods)
+                .filter(e -> e.getAnnotation(Test.class) != null)
+                .sorted((o1, o2) -> o1.getAnnotation(Test.class).priority() - o2.getAnnotation(Test.class).priority())
+                .collect(Collectors.toList());
+    }
+
+    private static void runMethods(List<Method> methods) {
+        try {
+            for (Method method : methods) {
+                if (method.isAnnotationPresent(Test.class))
                     method.invoke(object);
             }
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }
