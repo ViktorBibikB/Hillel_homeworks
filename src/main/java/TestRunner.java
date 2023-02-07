@@ -90,10 +90,7 @@ public class TestRunner {
 
     private static void runAllMethods() {
         try {
-            methodList = Arrays.stream(allMethods)
-                    .filter(e -> e.getAnnotation(Test.class) != null)
-                    .sorted(Comparator.comparingInt(o -> o.getAnnotation(Test.class).priority()))
-                    .collect(Collectors.toList());
+            methodList = sortMethodList(allMethods);
 
             for (Method method : allMethods) {
                 if (method.getAnnotation(BeforeSuite.class) != null)
