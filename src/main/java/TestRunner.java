@@ -15,7 +15,7 @@ public class TestRunner {
     private static int counterBeforeSuit;
     private static int counterAfterSuit;
     private static final int MAX_COUNT = 1;
-    private static Queue<Method> methodNames = new LinkedList<>();
+    private static List<Method> methodList = new ArrayList<>();
     private static Object object;
     private static Method[] allMethods;
 
@@ -33,9 +33,11 @@ public class TestRunner {
                     throw new IncorrectNumberOfSuitesException("\"Before suite\" annotated methods count should be equal to 1.");
             }
 
-            runMethodByAnnotation(object, BeforeSuite.class);
-            runMethodByAnnotation(object, Test.class);
-            runMethodByAnnotation(object, AfterSuite.class);
+            runMethodByAnnotation(BeforeSuite.class);
+            runMethodByAnnotation(Test.class);
+            runMethodByAnnotation(AfterSuite.class);
+
+//            runAllMethods();
 
         } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
             e.printStackTrace();
@@ -61,16 +63,24 @@ public class TestRunner {
         return counterAfterSuit;
     }
 
-    private static void runMethodByAnnotation(Object type, Class<? extends Annotation> annotation) {
+    private static void runMethodByAnnotation(Class<? extends Annotation> annotation) {
         try {
-//            sortMethods(allMethods);
-            for (Method method : allMethods) {
-                if (method.isAnnotationPresent(annotation)) {
-                    if (method.isAnnotationPresent(Test.class)) {
-                        runMethods(sortMethods(allMethods));
+            if (annotation.equals(Test.class)) {
+                int length = sortMethodList(allMethods).size();
+                Method[] methods = new Method[length];
 
-                    } else
-                    method.invoke(type);
+                for (int i = 0; i < length; i++) {
+                    methods[i] = sortMethodList(allMethods).get(i);
+                }
+
+                for (Method method1 : methods) {
+                    method1.invoke(object);
+                }
+            } else {
+                for (Method method : allMethods) {
+                    if (method.isAnnotationPresent(annotation)) {
+                        method.invoke(object);
+                    }
                 }
             }
         } catch (IllegalAccessException | InvocationTargetException e) {
@@ -78,21 +88,32 @@ public class TestRunner {
         }
     }
 
-    private static List<Method> sortMethods(Method[] methods) {
-        return Arrays.stream(methods)
-                .filter(e -> e.getAnnotation(Test.class) != null)
-                .sorted((o1, o2) -> o1.getAnnotation(Test.class).priority() - o2.getAnnotation(Test.class).priority())
-                .collect(Collectors.toList());
-    }
-
-    private static void runMethods(List<Method> methods) {
+    private static void runAllMethods() {
         try {
-            for (Method method : methods) {
-                if (method.isAnnotationPresent(Test.class))
-                    method.invoke(object);
+            methodList = Arrays.stream(allMethods)
+                    .filter(e -> e.getAnnotation(Test.class) != null)
+                    .sorted(Comparator.comparingInt(o -> o.getAnnotation(Test.class).priority()))
+                    .collect(Collectors.toList());
+
+            for (Method method : allMethods) {
+                if (method.getAnnotation(BeforeSuite.class) != null)
+                    methodList.add(0, method);
+                if (method.getAnnotation(AfterSuite.class) != null)
+                    methodList.add(method);
             }
+
+            for (Method finalMethod : methodList)
+                finalMethod.invoke(object);
+
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
+    }
+
+    private static List<Method> sortMethodList(Method[] methods) {
+        return Arrays.stream(methods)
+                .filter(e -> e.getAnnotation(Test.class) != null)
+                .sorted(Comparator.comparingInt(o -> o.getAnnotation(Test.class).priority()))
+                .collect(Collectors.toList());
     }
 }
