@@ -18,3 +18,4 @@
 16. [Lesson_20/Home_work_18](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_20_homework_18) - Branch for Lesson 20/Home work 18.
 17. [Lesson_22/Home_work_19](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_22_homework_19) - Branch for Lesson 22/Home work 19.
 18. [Lesson_24/Home_work_20](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_24_homework_20) - Branch for Lesson 24/Home work 20.
+19. [Lesson_26/Home_work_21](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_26_homework_21) - Branch for Lesson 26/Home work 21.
