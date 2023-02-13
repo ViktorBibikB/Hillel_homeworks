@@ -2,18 +2,32 @@ package dbconnection;
 
 import java.sql.*;
 
-public class DataBaseConnection {
-    Connection connection;
+public class DataBaseConnection implements AutoCloseable {
+    private static Connection connection;
 
-    String url = "jdbc:mysql://localhost:3306/test_mysql_db";
-    String username = System.getenv("MYSQL_USER");
-    String password = System.getenv("MYSQL_PASSWORD");
+    private static final String url = "jdbc:mysql://localhost:3306/test_mysql_db";
+    private static final String username = System.getenv("MYSQL_USER");
+    private static final String password = System.getenv("MYSQL_PASSWORD");
 
-    public Connection getConnection() {
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
+//    public Connection getConnection() {
+//        try{
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//
+//            connection = DriverManager.getConnection(url, username, password);
+//
+//        } catch (ClassNotFoundException | SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return connection;
+//    }
 
-            connection = DriverManager.getConnection(url, username, password);
+    public static Connection getConnection() {
+        try {
+            if (connection == null){
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                connection = DriverManager.getConnection(url, username, password);
+            }
+
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
@@ -27,5 +41,10 @@ public class DataBaseConnection {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+        connection.close();
     }
 }
