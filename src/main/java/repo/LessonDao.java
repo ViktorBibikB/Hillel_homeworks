@@ -125,7 +125,7 @@ public class LessonDao implements DaoAble {
         }
     }
 
-    public boolean isLessonPresent(int id) {
+    public boolean isLessonPresent(int id) throws LessonDoesNotExistsException {
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM test_mysql_db.lesson WHERE id = ?")) {
             statement.setInt(1, id);
             statement.execute();
@@ -134,8 +134,10 @@ public class LessonDao implements DaoAble {
             if(resultSet.next()){
                 return true;
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new LessonDoesNotExistsException("Lesson with id \"" + id + "\" doesn't exists. " +
+                    "SQLState is: " + e.getSQLState() +
+                    ". SQLErrorCode is " + e.getErrorCode());
         }
         return false;
     }

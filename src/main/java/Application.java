@@ -13,9 +13,8 @@ public class Application {
         try(DataBaseConnection mySqlConnection = DataBaseConnection.getInstance()){
             LessonDao lessonDao = new LessonDao(mySqlConnection.getConnection());
             lessonDao.getAllLessons();
-            lessonDao.getLessonById(49);
+            lessonDao.getLessonById(lessonDao.getLastAddedLessonId());
             lessonDao.deleteLesson(lessonDao.getLastAddedLessonId());
-
             lessonDao.addLesson("English", "2022-01-01 12:45:36", 2);
             lessonDao.getAllLessons();
         } catch (DBCustomeException | LessonDoesNotExistsException | LessonsArrayIsEmptyException | DublicatedHomeWorkIDException e) {
