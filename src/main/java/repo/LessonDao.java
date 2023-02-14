@@ -1,5 +1,6 @@
 package repo;
 
+import model.Homework;
 import model.Lesson;
 import my.exceptions.DublicatedHomeWorkIDException;
 import my.exceptions.LessonDoesNotExistsException;
@@ -20,29 +21,29 @@ public class LessonDao implements DaoAble {
     }
 
     @Override
-    public void addLesson(String name, String date, int homework) throws DublicatedHomeWorkIDException {
+    public void addLesson(Lesson lesson) throws DublicatedHomeWorkIDException {
         int resultSet = 0;
         try (PreparedStatement statement = connection.prepareStatement("INSERT INTO test_mysql_db.Lesson (name, updatedAt, homework_id)" +
                 "VALUES (?, ?, ?)")) {
-            statement.setString(1, name);
-            statement.setString(2, date);
-            statement.setInt(3, homework);
+            statement.setString(1, lesson.getName());
+            statement.setString(2, lesson.getUpdatedTime());
+            statement.setInt(3, lesson.getHomework().getId());
             statement.executeUpdate();
             resultSet = statement.getUpdateCount();
 
-            if(resultSet > 0)
+            if (resultSet > 0)
                 System.out.println("Lesson was added successfully: " + resultSet);
             System.out.println("Last added lesson id is: " + getLastAddedLessonId() + "\n");
         } catch (SQLException e) {
-            if(resultSet == 0)
-                throw new DublicatedHomeWorkIDException("Homework with id: " + homework + " is already exists. " +
+            if (resultSet == 0)
+                throw new DublicatedHomeWorkIDException("Homework with id: " + lesson.getHomework() + " is already exists. " +
                         "Specified homeworkID should be unique.");
         }
     }
 
     @Override
     public void deleteLesson(int id) throws LessonDoesNotExistsException {
-        if (isLessonPresent(id)){
+        if (isLessonPresent(id)) {
             int rowsDeleted = -1;
             try (PreparedStatement statement = connection.prepareStatement("DELETE FROM test_mysql_db.lesson WHERE id = ?")) {
                 statement.setInt(1, id);
@@ -62,23 +63,25 @@ public class LessonDao implements DaoAble {
         String sql = "SELECT * FROM test_mysql_db.lesson";
         List<Lesson> lessons = new ArrayList<>();
         Lesson lesson;
+        Homework homework;
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
 
 
-
             while (resultSet.next()) {
-                    lesson = new Lesson();
-                    lesson.setId(resultSet.getInt("id"));
-                    lesson.setName(resultSet.getString("name"));
-                    lesson.setHomework(resultSet.getString("homework_id"));
+                lesson = new Lesson();
+                homework = new Homework();
+                homework.setId(resultSet.getInt("homework_id"));
+                lesson.setId(resultSet.getInt("id"));
+                lesson.setName(resultSet.getString("name"));
+                lesson.setHomework(homework);
 
-                    lessons.add(lesson);
+                lessons.add(lesson);
             }
 
-            if(lessons.size() == 0)
+            if (lessons.size() == 0)
                 throw new LessonsArrayIsEmptyException("Lessons array is empty.");
 
             System.out.println(lessons);
@@ -98,14 +101,15 @@ public class LessonDao implements DaoAble {
             resultSet.next();
 
             Lesson lesson = new Lesson();
+            Homework homework = new Homework();
             lesson.setId(resultSet.getInt("id"));
             lesson.setName(resultSet.getString("name"));
-            lesson.setHomework(resultSet.getString("homework_id"));
+            homework.setId(resultSet.getInt("homework_id"));
+            lesson.setHomework(homework);
 
             System.out.printf("Lesson with id %d is: " + lesson + "\n", id);
             return lesson;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new LessonDoesNotExistsException("Lesson with id \"" + id + "\" doesn't exists. " +
                     "SQLState is: " + e.getSQLState() +
                     ". SQLErrorCode is " + e.getErrorCode());
@@ -131,7 +135,7 @@ public class LessonDao implements DaoAble {
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
 
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 return true;
             }
         } catch (SQLException e) {

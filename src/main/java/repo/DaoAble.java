@@ -9,8 +9,12 @@ import java.util.List;
 
 public interface DaoAble {
 
-    void addLesson(String name, String date, int homework) throws DublicatedHomeWorkIDException;
+    //    void addLesson(String name, String date, int homework) throws DublicatedHomeWorkIDException;
+    void addLesson(Lesson lesson) throws DublicatedHomeWorkIDException;
+
     void deleteLesson(int id) throws LessonDoesNotExistsException;
+
     List<Lesson> getAllLessons() throws LessonsArrayIsEmptyException;
+
     Lesson getLessonById(int id) throws LessonDoesNotExistsException;
 }

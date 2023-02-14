@@ -1,4 +1,6 @@
 import dbconnection.DataBaseConnection;
+import model.Homework;
+import model.Lesson;
 import my.exceptions.DBCustomeException;
 import my.exceptions.DublicatedHomeWorkIDException;
 import my.exceptions.LessonDoesNotExistsException;
@@ -14,8 +16,8 @@ public class Application {
             LessonDao lessonDao = new LessonDao(mySqlConnection.getConnection());
             lessonDao.getAllLessons();
             lessonDao.getLessonById(lessonDao.getLastAddedLessonId());
-            lessonDao.deleteLesson(5);
-            lessonDao.addLesson("English", "2022-01-01 12:45:36", 2);
+            lessonDao.deleteLesson(lessonDao.getLastAddedLessonId());
+            lessonDao.addLesson(new Lesson("English", "2022-01-01 12:45:36", 2));
             lessonDao.getAllLessons();
         } catch (DBCustomeException | LessonDoesNotExistsException | LessonsArrayIsEmptyException | DublicatedHomeWorkIDException e) {
             System.out.println(e.getMessage());
