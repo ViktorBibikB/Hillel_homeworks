@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DataBaseConnection implements AutoCloseable {
     private static DataBaseConnection dataBaseConnection;
-    private static Connection connection;
+    private Connection connection;
 
     private static final String url = "jdbc:mysql://localhost:3306/test_mysql_db";
     private static final String username = System.getenv("MYSQL_USER");
@@ -19,7 +19,7 @@ public class DataBaseConnection implements AutoCloseable {
         return dataBaseConnection;
     }
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         try {
             if (connection == null) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
