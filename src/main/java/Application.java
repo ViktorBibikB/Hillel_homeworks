@@ -14,11 +14,12 @@ public class Application {
             LessonDao lessonDao = new LessonDao(mySqlConnection.getConnection());
             lessonDao.getAllLessons();
             lessonDao.getLessonById(lessonDao.getLastAddedLessonId());
-            lessonDao.deleteLesson(lessonDao.getLastAddedLessonId());
+            lessonDao.deleteLesson(5);
             lessonDao.addLesson("English", "2022-01-01 12:45:36", 2);
             lessonDao.getAllLessons();
         } catch (DBCustomeException | LessonDoesNotExistsException | LessonsArrayIsEmptyException | DublicatedHomeWorkIDException e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

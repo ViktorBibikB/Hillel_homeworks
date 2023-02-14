@@ -54,7 +54,7 @@ public class LessonDao implements DaoAble {
                 throwables.printStackTrace();
             }
         } else
-            throw new LessonDoesNotExistsException("Lesson with id \" + id + \" does not exists");
+            throw new LessonDoesNotExistsException("Lesson with id \"" + id + "\" does not exists");
     }
 
     @Override
