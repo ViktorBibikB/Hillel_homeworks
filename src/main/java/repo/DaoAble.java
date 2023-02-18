@@ -16,5 +16,5 @@ public interface DaoAble {
 
     List<Lesson> getAllLessons() throws LessonsArrayIsEmptyException;
 
-    Lesson getLessonById(int id) throws LessonDoesNotExistsException;
+    Lesson getLessonById(Integer id) throws LessonDoesNotExistsException;
 }

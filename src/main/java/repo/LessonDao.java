@@ -99,7 +99,7 @@ public class LessonDao implements DaoAble {
     }
 
     @Override
-    public Lesson getLessonById(int id) throws LessonDoesNotExistsException {
+    public Lesson getLessonById(Integer id) throws LessonDoesNotExistsException {
         final String SQL = "SELECT * " +
                            " FROM lesson" +
                            " LEFT JOIN homework" +
