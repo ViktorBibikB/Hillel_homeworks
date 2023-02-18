@@ -1,7 +1,7 @@
 package model;
 
 public class Lesson {
-    int id;
+    Integer id;
     String name;
     String updatedTime;
     Homework homework;
@@ -9,18 +9,17 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(String name, String updatedTime, int homeworkId) {
-        homework = new Homework();
-        homework.setId(homeworkId);
+    public Lesson(String name, String updatedTime, Homework homework) {
+        this.homework = homework;
         this.name = name;
         this.updatedTime = updatedTime;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

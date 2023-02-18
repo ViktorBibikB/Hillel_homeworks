@@ -3,6 +3,7 @@ package repo;
 import model.Homework;
 import model.Lesson;
 import my.exceptions.DublicatedHomeWorkIDException;
+import my.exceptions.HomeWorkDoesNotExistsException;
 import my.exceptions.LessonDoesNotExistsException;
 import my.exceptions.LessonsArrayIsEmptyException;
 
@@ -60,20 +61,26 @@ public class LessonDao implements DaoAble {
 
     @Override
     public List<Lesson> getAllLessons() throws LessonsArrayIsEmptyException {
-        String sql = "SELECT * FROM test_mysql_db.lesson";
+//        String sql = "SELECT * FROM test_mysql_db.lesson";
+        final String SQL = "SELECT * " +
+                " FROM lesson" +
+                " LEFT JOIN homework" +
+                " ON lesson.homework_id = homework.id ";
         List<Lesson> lessons = new ArrayList<>();
         Lesson lesson;
         Homework homework;
 
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (PreparedStatement statement = connection.prepareStatement(SQL)) {
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
 
 
             while (resultSet.next()) {
+
+                homework = new Homework(resultSet.getInt("homework.id"), resultSet.getString("homework.name"),
+                        resultSet.getString("homework.description"));
+
                 lesson = new Lesson();
-                homework = new Homework();
-                homework.setId(resultSet.getInt("homework_id"));
                 lesson.setId(resultSet.getInt("id"));
                 lesson.setName(resultSet.getString("name"));
                 lesson.setHomework(homework);
@@ -93,24 +100,57 @@ public class LessonDao implements DaoAble {
 
     @Override
     public Lesson getLessonById(int id) throws LessonDoesNotExistsException {
+        final String SQL = "SELECT * " +
+                           " FROM lesson" +
+                           " LEFT JOIN homework" +
+                           " ON lesson.homework_id = homework.id " +
+                           " WHERE lesson.id = ?";
 
-        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM test_mysql_db.lesson WHERE id = ?")) {
+
+        Lesson lesson;
+        Homework homework;
+
+        try (PreparedStatement statement = connection.prepareStatement(SQL)) {
             statement.setInt(1, id);
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
             resultSet.next();
 
-            Lesson lesson = new Lesson();
-            Homework homework = new Homework();
-            lesson.setId(resultSet.getInt("id"));
-            lesson.setName(resultSet.getString("name"));
-            homework.setId(resultSet.getInt("homework_id"));
+            homework = new Homework(resultSet.getInt("homework.id"), resultSet.getString("homework.name"),
+                    resultSet.getString("homework.description"));
+
+            lesson = new Lesson();
+            lesson.setId(resultSet.getInt("lesson.id"));
+            lesson.setName(resultSet.getString("lesson.name"));
             lesson.setHomework(homework);
 
             System.out.printf("Lesson with id %d is: " + lesson + "\n", id);
             return lesson;
         } catch (SQLException e) {
             throw new LessonDoesNotExistsException("Lesson with id \"" + id + "\" doesn't exists. " +
+                    "SQLState is: " + e.getSQLState() +
+                    ". SQLErrorCode is " + e.getErrorCode());
+
+        }
+    }
+
+    public Homework getHomeworkByLessonName(String partialName) throws HomeWorkDoesNotExistsException {
+
+        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM test_mysql_db.homework WHERE name like ?")) {
+            statement.setString(1, partialName + "%");
+            statement.execute();
+            ResultSet resultSet = statement.getResultSet();
+            resultSet.next();
+
+            Homework homework = new Homework();
+            homework.setId(resultSet.getInt("id"));
+            homework.setName(resultSet.getString("name"));
+            homework.setDescription(resultSet.getString("description"));
+
+            System.out.printf("Homework with name %s is: " + homework + "\n", partialName);
+            return homework;
+        } catch (SQLException e) {
+            throw new HomeWorkDoesNotExistsException("Homework with name \"" + partialName + "\" doesn't exists. " +
                     "SQLState is: " + e.getSQLState() +
                     ". SQLErrorCode is " + e.getErrorCode());
 
