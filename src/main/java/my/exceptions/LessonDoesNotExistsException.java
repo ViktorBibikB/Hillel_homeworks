@@ -11,7 +11,6 @@ public class LessonDoesNotExistsException extends SQLException {
         super(reason);
     }
 
-
     public LessonDoesNotExistsException(String reason, String sqlState){
         super(reason, sqlState);
     }

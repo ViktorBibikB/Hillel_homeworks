@@ -61,11 +61,7 @@ public class LessonDao implements DaoAble {
 
     @Override
     public List<Lesson> getAllLessons() throws LessonsArrayIsEmptyException {
-//        String sql = "SELECT * FROM test_mysql_db.lesson";
-        final String SQL = "SELECT * " +
-                " FROM lesson" +
-                " LEFT JOIN homework" +
-                " ON lesson.homework_id = homework.id ";
+        final String SQL = "SELECT * FROM lesson";
         List<Lesson> lessons = new ArrayList<>();
         Lesson lesson;
         Homework homework;
@@ -77,8 +73,8 @@ public class LessonDao implements DaoAble {
 
             while (resultSet.next()) {
 
-                homework = new Homework(resultSet.getInt("homework.id"), resultSet.getString("homework.name"),
-                        resultSet.getString("homework.description"));
+                homework = new Homework();
+                homework.setId(resultSet.getInt("lesson.homework_id"));
 
                 lesson = new Lesson();
                 lesson.setId(resultSet.getInt("id"));
