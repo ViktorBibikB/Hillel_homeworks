@@ -3,7 +3,9 @@ HW_22.iml
 .classpath
 .project
 .settings/
-target/
+target/*
+!target/*
+!target/HW_22-1.0-SNAPSHOT.jar
 implementation/.classpath
 implementation/.project
 implementation/.settings/
@@ -20,4 +22,3 @@ web/.classpath
 web/.project
 web/.settings/
 web/target/
-!/target/HW_22-1.0-SNAPSHOT.jar
