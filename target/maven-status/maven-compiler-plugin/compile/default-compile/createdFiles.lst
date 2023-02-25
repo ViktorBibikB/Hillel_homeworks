@@ -1,9 +1,0 @@
-logger\filelogger\FileLoggerConfigurationLoader.class
-logger\Appliacation.class
-logger\filelogger\FileLoggerConfiguration.class
-logger\filelogger\LoggingLevel.class
-logger\exceptions\FileMaxSizeReachedException.class
-logger\logger\LoggerConfigurationLoader.class
-logger\filelogger\FileLogger.class
-logger\logger\Logger.class
-math\actions\MathActions.class
