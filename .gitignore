@@ -4,8 +4,8 @@ HW_22.iml
 .project
 .settings/
 !target/*
-target/*
 !target/HW_22-1.0-SNAPSHOT.jar
+target/*
 implementation/.classpath
 implementation/.project
 implementation/.settings/
