@@ -36,11 +36,15 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          graalvm: '21.0.0.2'
-          native-image: true
           java-version: '17'
           distribution: 'temurin'
       - name: Build project
         run: |
             mvn --batch-mode package
-            cp target/*.jar HW_22
+            mkdir jarfile cp target/*.jar jarfile
+
+      - name: Persist data as artifact
+          uses: actions/setup-java@v3
+          with:
+            name: hw_22_artifact
+            path: jarfile
