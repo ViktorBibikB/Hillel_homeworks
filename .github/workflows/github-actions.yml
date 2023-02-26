@@ -46,5 +46,5 @@ jobs:
       - name: Persist data as artifact
           uses: actions/upload-artifact@v3
           with:
-            name: hw_22_artifact
+            name: hw-22-artifact
             path: jarfile
