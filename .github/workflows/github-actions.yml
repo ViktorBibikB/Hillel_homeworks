@@ -41,7 +41,7 @@ jobs:
       - name: Build project
         run: |
             mvn --batch-mode package
-            mkdir jarfile cp target/*.jar jarfile
+            mkdir jarfile && cp target/*.jar jarfile
 
       - name: Persist data as artifact
           uses: actions/upload-artifact@v3
