@@ -44,7 +44,7 @@ jobs:
             mkdir jarfile cp target/*.jar jarfile
 
       - name: Persist data as artifact
-          uses: actions/setup-java@v3
+          uses: actions/upload-artifact@v3
           with:
             name: hw_22_artifact
             path: jarfile
