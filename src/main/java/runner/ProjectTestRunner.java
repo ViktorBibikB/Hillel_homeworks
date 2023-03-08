@@ -1,3 +1,5 @@
+package runner;
+
 import org.junit.platform.console.ConsoleLauncher;
 
 import java.io.*;
