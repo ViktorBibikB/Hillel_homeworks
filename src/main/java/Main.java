@@ -21,9 +21,6 @@ public class Main {
         Path path2 = Paths.get("tests.mathactions.SimpleMathLibraryTest.txt");
         File file = new File(path2.toString());
         String path3 = file.getPath();
-//        System.out.println(path.getFileName());
-//        System.out.println(file.getAbsoluteFile());
-//        System.out.println(path3);
         System.out.println(testResultParser.parser(path));
         System.out.println(testResultParser.parser(file));
         System.out.println(testResultParser.parser(path3));
