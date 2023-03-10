@@ -35,8 +35,7 @@ public class ProjectTestRunner {
 
         String resultString = bout.toString();
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(String.format("%s.txt", coreName)))) {
-            PrintWriter printWriter = new PrintWriter(bufferedWriter);
+        try (PrintWriter printWriter =  new PrintWriter(new FileWriter(String.format("%s.txt", coreName)))) {
             printWriter.println(resultString);
 
             printWriter.flush();
