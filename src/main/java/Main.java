@@ -1,6 +1,7 @@
+import runner.ProjectTestRunner;
 import runner.TestResultParser;
-//import tests.mathactions.ArrayActionsTest;
-//import tests.mathactions.SimpleMathLibraryTest;
+import tests.mathactions.ArrayActionsTest;
+import tests.mathactions.SimpleMathLibraryTest;
 
 import java.io.File;
 import java.nio.file.Path;
