@@ -1,4 +1,3 @@
-import runner.ProjectTestRunner;
 import runner.TestResultParser;
 //import tests.mathactions.ArrayActionsTest;
 //import tests.mathactions.SimpleMathLibraryTest;
@@ -12,8 +11,8 @@ public class Main {
         ProjectTestRunner projectTestRunner = new ProjectTestRunner();
         projectTestRunner.runByPackageName("tests.mathactions");
         projectTestRunner.runByClassName("tests.mathactions.ArrayActionsTest");
-//        projectTestRunner.runByClass(SimpleMathLibraryTest.class);
-//        projectTestRunner.runByClasses(SimpleMathLibraryTest.class, ArrayActionsTest.class);
+        projectTestRunner.runByClass(SimpleMathLibraryTest.class);
+        projectTestRunner.runByClasses(SimpleMathLibraryTest.class, ArrayActionsTest.class);
         projectTestRunner.runByClassesNames("tests.mathactions.ArrayActionsTest", "tests.mathactions.SimpleMathLibraryTest");
 
         TestResultParser testResultParser = new TestResultParser();
