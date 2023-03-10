@@ -35,10 +35,10 @@ public class ProjectTestRunner {
 
         String resultString = bout.toString();
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(String.format("%s.txt", coreName)))) {
-            bufferedWriter.write(resultString);
+        try (PrintWriter printWriter = new PrintWriter(new FileWriter(String.format("%s.txt", coreName)))) {
+            printWriter.write(resultString);
 
-            bufferedWriter.flush();
+            printWriter.flush();
         } catch (IOException e) {
             throw new RuntimeException("Failed to write message", e);
         }

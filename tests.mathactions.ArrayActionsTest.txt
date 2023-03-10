@@ -1,31 +1,158 @@
 
 Thanks for using JUnit! Support its development at https://junit.org/sponsoring
 
-[36m╷[0m
-[36m├─[0m [36mJUnit Jupiter[0m [32m✔[0m
-[36m│  └─[0m [36mArrayActionsTest[0m [32m✔[0m
-[36m│     ├─[0m [34mgetAllValesAfterLast4_negativeEmptyArrTest()[0m [32m✔[0m
-[36m│     ├─[0m [34misArrayConsistsOf4And1_negativeOnlyOneValues()[0m [32m✔[0m
-[36m│     ├─[0m [34misArrayConsistsOf4And1_negativeOneValueDifferFromOneOrFour()[0m [32m✔[0m
-[36m│     ├─[0m [34mgetAllValesAfterLast4_positiveTest()[0m [32m✔[0m
-[36m│     ├─[0m [34mgetAllValesAfterLast4_fourDoesntExistExceptionTest()[0m [32m✔[0m
-[36m│     ├─[0m [34misArrayConsistsOf4And1_negativeOnlyFourValues()[0m [32m✔[0m
-[36m│     ├─[0m [34misArrayConsistsOf4And1_positiveTest()[0m [32m✔[0m
-[36m│     └─[0m [34mgetAllValesAfterLast4_emptyArrExceptionTest()[0m [32m✔[0m
-[36m├─[0m [36mJUnit Vintage[0m [32m✔[0m
-[36m└─[0m [36mJUnit Platform Suite[0m [32m✔[0m
+Usage: ConsoleLauncher [OPTIONS]
+Launches the JUnit Platform for test discovery and execution.
+      [@<filename>...]       One or more argument files containing options.
 
-Test run finished after 17 ms
-[         4 containers found      ]
-[         0 containers skipped    ]
-[         4 containers started    ]
-[         0 containers aborted    ]
-[         4 containers successful ]
-[         0 containers failed     ]
-[         8 tests found           ]
-[         0 tests skipped         ]
-[         8 tests started         ]
-[         0 tests aborted         ]
-[         8 tests successful      ]
-[         0 tests failed          ]
+COMMANDS
+
+  -h, --help                 Display help information.
+      --list-engines         List all observable test engines.
+
+SELECTORS
+
+      --scan-classpath, --scan-class-path[=PATH]
+                             Scan all directories on the classpath or explicit classpath
+                               roots. Without arguments, only directories on the system
+                               classpath as well as additional classpath entries supplied via
+                               -cp (directories and JAR files) are scanned. Explicit classpath
+                               roots that are not on the classpath will be silently ignored.
+                               This option can be repeated.
+      --scan-modules         EXPERIMENTAL: Scan all resolved modules for test discovery.
+  -u, --select-uri=URI       Select a URI for test discovery. This option can be repeated.
+  -f, --select-file=FILE     Select a file for test discovery. This option can be repeated.
+  -d, --select-directory=DIR Select a directory for test discovery. This option can be
+                               repeated.
+  -o, --select-module=NAME   EXPERIMENTAL: Select single module for test discovery. This
+                               option can be repeated.
+  -p, --select-package=PKG   Select a package for test discovery. This option can be repeated.
+  -c, --select-class=CLASS   Select a class for test discovery. This option can be repeated.
+  -m, --select-method=NAME   Select a method for test discovery. This option can be repeated.
+  -r, --select-resource=RESOURCE
+                             Select a classpath resource for test discovery. This option can
+                               be repeated.
+  -i, --select-iteration=TYPE:VALUE[INDEX(..INDEX)?(,INDEX(..INDEX)?)*]
+                             Select iterations for test discovery (e.g. method:com.acme.Foo#m()
+                               [1..2]). This option can be repeated.
+
+FILTERS
+
+  -n, --include-classname=PATTERN
+                             Provide a regular expression to include only classes whose fully
+                               qualified names match. To avoid loading classes unnecessarily,
+                               the default pattern only includes class names that begin with
+                               "Test" or end with "Test" or "Tests". When this option is
+                               repeated, all patterns will be combined using OR semantics.
+                               Default: ^(Test.*|.+[.$]Test.*|.*Tests?)$
+  -N, --exclude-classname=PATTERN
+                             Provide a regular expression to exclude those classes whose fully
+                               qualified names match. When this option is repeated, all
+                               patterns will be combined using OR semantics.
+      --include-package=PKG  Provide a package to be included in the test run. This option can
+                               be repeated.
+      --exclude-package=PKG  Provide a package to be excluded from the test run. This option
+                               can be repeated.
+  -t, --include-tag=TAG      Provide a tag or tag expression to include only tests whose tags
+                               match. When this option is repeated, all patterns will be
+                               combined using OR semantics.
+  -T, --exclude-tag=TAG      Provide a tag or tag expression to exclude those tests whose tags
+                               match. When this option is repeated, all patterns will be
+                               combined using OR semantics.
+  -e, --include-engine=ID    Provide the ID of an engine to be included in the test run. This
+                               option can be repeated.
+  -E, --exclude-engine=ID    Provide the ID of an engine to be excluded from the test run.
+                               This option can be repeated.
+
+RUNTIME CONFIGURATION
+
+      -cp, --classpath, --class-path=PATH
+                             Provide additional classpath entries -- for example, for adding
+                               engines and their dependencies. This option can be repeated.
+      --config=KEY=VALUE     Set a configuration parameter for test discovery and execution.
+                               This option can be repeated.
+
+REPORTING
+
+      --fail-if-no-tests     Fail and return exit status code 2 if no tests are found.
+      --reports-dir=DIR      Enable report output into a specified local directory (will be
+                               created if it does not exist).
+
+CONSOLE OUTPUT
+
+      --disable-ansi-colors  Disable ANSI colors in output (not supported by all terminals).
+      --color-palette=FILE   Specify a path to a properties file to customize ANSI style of
+                               output (not supported by all terminals).
+      --single-color         Style test output using only text attributes, no color (not
+                               supported by all terminals).
+      --disable-banner       Disable print out of the welcome message.
+      --details=MODE         Select an output details mode for when tests are executed. Use
+                               one of: none, summary, flat, tree, verbose. If 'none' is
+                               selected, then only the summary and test failures are shown.
+                               Default: tree.
+      --details-theme=THEME  Select an output details tree theme for when tests are executed.
+                               Use one of: ascii, unicode. Default is detected based on
+                               default character encoding.
+
+For more information, please refer to the JUnit User Guide at
+https://junit.org/junit5/docs/current/user-guide/
+org.junit.platform.commons.JUnitException: TestEngine with ID 'junit-jupiter' failed to discover tests
+	at org.junit.platform.launcher.core.EngineDiscoveryOrchestrator.discoverEngineRoot(EngineDiscoveryOrchestrator.java:160)
+	at org.junit.platform.launcher.core.EngineDiscoveryOrchestrator.discoverSafely(EngineDiscoveryOrchestrator.java:132)
+	at org.junit.platform.launcher.core.EngineDiscoveryOrchestrator.discover(EngineDiscoveryOrchestrator.java:107)
+	at org.junit.platform.launcher.core.EngineDiscoveryOrchestrator.discover(EngineDiscoveryOrchestrator.java:78)
+	at org.junit.platform.launcher.core.DefaultLauncher.discover(DefaultLauncher.java:110)
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53)
+	at org.junit.platform.console.tasks.ConsoleTestExecutor.executeTests(ConsoleTestExecutor.java:66)
+	at org.junit.platform.console.tasks.ConsoleTestExecutor.lambda$execute$0(ConsoleTestExecutor.java:58)
+	at org.junit.platform.console.tasks.CustomContextClassLoaderExecutor.invoke(CustomContextClassLoaderExecutor.java:33)
+	at org.junit.platform.console.tasks.ConsoleTestExecutor.execute(ConsoleTestExecutor.java:58)
+	at org.junit.platform.console.ConsoleLauncher.executeTests(ConsoleLauncher.java:120)
+	at org.junit.platform.console.ConsoleLauncher.execute(ConsoleLauncher.java:82)
+	at org.junit.platform.console.ConsoleLauncher.execute(ConsoleLauncher.java:55)
+	at org.junit.platform.console.ConsoleLauncher.execute(ConsoleLauncher.java:48)
+	at runner.ProjectTestRunner.runConsoleAndWriteResult(ProjectTestRunner.java:34)
+	at runner.ProjectTestRunner.runByClassesNames(ProjectTestRunner.java:27)
+	at Main.main(Main.java:17)
+Caused by: org.junit.platform.commons.JUnitException: ClassSelector [className = ' tests.mathactions.ArrayActionsTest'] resolution failed
+	at org.junit.platform.launcher.listeners.discovery.AbortOnFailureLauncherDiscoveryListener.selectorProcessed(AbortOnFailureLauncherDiscoveryListener.java:39)
+	at org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolution.resolveCompletely(EngineDiscoveryRequestResolution.java:103)
+	at org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolution.run(EngineDiscoveryRequestResolution.java:83)
+	at org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolver.resolve(EngineDiscoveryRequestResolver.java:113)
+	at org.junit.jupiter.engine.discovery.DiscoverySelectorResolver.resolveSelectors(DiscoverySelectorResolver.java:46)
+	at org.junit.jupiter.engine.JupiterTestEngine.discover(JupiterTestEngine.java:69)
+	at org.junit.platform.launcher.core.EngineDiscoveryOrchestrator.discoverEngineRoot(EngineDiscoveryOrchestrator.java:152)
+	... 18 more
+Caused by: org.junit.platform.commons.PreconditionViolationException: Could not load class with name:  tests.mathactions.ArrayActionsTest
+	at org.junit.platform.engine.discovery.ClassSelector.lambda$getJavaClass$0(ClassSelector.java:75)
+	at org.junit.platform.commons.function.Try$Failure.getOrThrow(Try.java:335)
+	at org.junit.platform.engine.discovery.ClassSelector.getJavaClass(ClassSelector.java:74)
+	at org.junit.jupiter.engine.discovery.ClassSelectorResolver.resolve(ClassSelectorResolver.java:66)
+	at org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolution.lambda$resolve$2(EngineDiscoveryRequestResolution.java:135)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.tryAdvance(ArrayList.java:1632)
+	at java.base/java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:127)
+	at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:502)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:488)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+	at java.base/java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:150)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.findFirst(ReferencePipeline.java:543)
+	at org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolution.resolve(EngineDiscoveryRequestResolution.java:189)
+	at org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolution.resolve(EngineDiscoveryRequestResolution.java:126)
+	at org.junit.platform.engine.support.discovery.EngineDiscoveryRequestResolution.resolveCompletely(EngineDiscoveryRequestResolution.java:92)
+	... 23 more
+Caused by: java.lang.ClassNotFoundException: tests.mathactions.ArrayActionsTest
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:581)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:522)
+	at org.junit.platform.commons.util.ReflectionUtils.lambda$tryToLoadClass$9(ReflectionUtils.java:831)
+	at org.junit.platform.commons.function.Try.lambda$call$0(Try.java:57)
+	at org.junit.platform.commons.function.Try.of(Try.java:93)
+	at org.junit.platform.commons.function.Try.call(Try.java:57)
+	at org.junit.platform.commons.util.ReflectionUtils.tryToLoadClass(ReflectionUtils.java:794)
+	at org.junit.platform.commons.util.ReflectionUtils.tryToLoadClass(ReflectionUtils.java:750)
+	... 38 more
 
