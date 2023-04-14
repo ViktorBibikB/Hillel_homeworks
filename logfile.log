@@ -1,24 +1,24 @@
-2023-04-14 12:23:23,077 [main] INFO  coffee.order.CoffeeOrderBoard - The work of the method add
-2023-04-14 12:23:23,085 [main] INFO  coffee.order.CoffeeOrderBoard - Create order: 1 | User_1 [Tea, Burger, Cake]
-2023-04-14 12:23:23,085 [main] INFO  coffee.order.CoffeeOrderBoard - The work of the method add
-2023-04-14 12:23:23,086 [main] INFO  coffee.order.CoffeeOrderBoard - Create order: 2 | Ann [Tea, Cake]
-2023-04-14 12:23:23,086 [main] INFO  coffee.order.CoffeeOrderBoard - The work of the method add
-2023-04-14 12:23:23,086 [main] ERROR coffee.order.CoffeeOrderBoard - Exception: Customer name error null
-2023-04-14 12:23:23,086 [main] INFO  coffee.order.CoffeeOrderBoard - The work of the method deliver
-2023-04-14 12:23:23,087 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver order 1 | User_1
-2023-04-14 12:23:23,089 [main] INFO  coffee.order.CoffeeOrderBoard - The work of the method deliver by id Order
-2023-04-14 12:23:23,089 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver order 2 | Ann
-2023-04-14 12:23:23,089 [main] INFO  coffee.order.CoffeeOrderBoard - The work of the method deliver by id Order
-2023-04-14 12:23:23,089 [main] INFO  coffee.order.CoffeeOrderBoard - order list is empty
-2023-04-14 12:25:30,312 [main] INFO  coffee.order.CoffeeOrderBoard - Add is working
-2023-04-14 12:25:30,321 [main] INFO  coffee.order.CoffeeOrderBoard - Create order: 1 | User_1 [Tea, Cake, Candy]
-2023-04-14 12:25:30,321 [main] INFO  coffee.order.CoffeeOrderBoard - Add is working
-2023-04-14 12:25:30,321 [main] INFO  coffee.order.CoffeeOrderBoard - Create order: 2 | User_2 [Tea, Cake]
-2023-04-14 12:25:30,321 [main] INFO  coffee.order.CoffeeOrderBoard - Add is working
-2023-04-14 12:25:30,322 [main] ERROR coffee.order.CoffeeOrderBoard - Exception: Customer name error null
-2023-04-14 12:25:30,322 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver is working
-2023-04-14 12:25:30,322 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver order 1 | User_1
-2023-04-14 12:25:30,322 [main] INFO  coffee.order.CoffeeOrderBoard - Order is working
-2023-04-14 12:25:30,322 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver order 2 | User_2
-2023-04-14 12:25:30,322 [main] INFO  coffee.order.CoffeeOrderBoard - Order is working
-2023-04-14 12:25:30,323 [main] INFO  coffee.order.CoffeeOrderBoard - order list is empty
+2023-04-14 12:33:57,710 [main] INFO  coffee.order.CoffeeOrderBoard - Add is working
+2023-04-14 12:33:57,718 [main] INFO  coffee.order.CoffeeOrderBoard - Create order: 1 | User_1 [Tea, Cake, Candy]
+2023-04-14 12:33:57,718 [main] INFO  coffee.order.CoffeeOrderBoard - Add is working
+2023-04-14 12:33:57,718 [main] INFO  coffee.order.CoffeeOrderBoard - Create order: 2 | User_2 [Tea, Cake]
+2023-04-14 12:33:57,719 [main] INFO  coffee.order.CoffeeOrderBoard - Add is working
+2023-04-14 12:33:57,719 [main] ERROR coffee.order.CoffeeOrderBoard - Exception: Customer name error null
+2023-04-14 12:33:57,719 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver is working
+2023-04-14 12:33:57,719 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver order 1 | User_1
+2023-04-14 12:33:57,722 [main] INFO  coffee.order.CoffeeOrderBoard - Order is working
+2023-04-14 12:33:57,722 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver order 2 | User_2
+2023-04-14 12:33:57,722 [main] INFO  coffee.order.CoffeeOrderBoard - Order is working
+2023-04-14 12:33:57,722 [main] INFO  coffee.order.CoffeeOrderBoard - order list is empty
+2023-04-14 12:35:08,578 [main] INFO  coffee.order.CoffeeOrderBoard - Add is working
+2023-04-14 12:35:08,587 [main] INFO  coffee.order.CoffeeOrderBoard - Order is created: 1 | User_1 [Tea, Cake, Candy]
+2023-04-14 12:35:08,587 [main] INFO  coffee.order.CoffeeOrderBoard - Add is working
+2023-04-14 12:35:08,587 [main] INFO  coffee.order.CoffeeOrderBoard - Order is created: 2 | User_2 [Tea, Cake]
+2023-04-14 12:35:08,587 [main] INFO  coffee.order.CoffeeOrderBoard - Add is working
+2023-04-14 12:35:08,588 [main] ERROR coffee.order.CoffeeOrderBoard - Exception: Customer name error null
+2023-04-14 12:35:08,588 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver is working
+2023-04-14 12:35:08,588 [main] INFO  coffee.order.CoffeeOrderBoard - Order is delivered 1 | User_1
+2023-04-14 12:35:08,588 [main] INFO  coffee.order.CoffeeOrderBoard - Order is working
+2023-04-14 12:35:08,588 [main] INFO  coffee.order.CoffeeOrderBoard - Deliver order 2 | User_2
+2023-04-14 12:35:08,588 [main] INFO  coffee.order.CoffeeOrderBoard - Order is working
+2023-04-14 12:35:08,589 [main] INFO  coffee.order.CoffeeOrderBoard - order list is empty

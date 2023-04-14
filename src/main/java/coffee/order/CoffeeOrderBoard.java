@@ -1,6 +1,6 @@
 package coffee.order;
 
-import exeption.ErrorNameCustomer;
+import exeption.ErrorCustomerName;
 import exeption.ErrorOrdersList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,15 +19,15 @@ public class CoffeeOrderBoard {
     public void add(String nameCustomer, String... orders) {
         LOGGER.info("Add is working");
         try {
-            if (nameCustomer == null || nameCustomer.equals("")) throw new ErrorNameCustomer("Customer name error");
+            if (nameCustomer == null || nameCustomer.equals("")) throw new ErrorCustomerName("Customer name error");
             if (orders.length == 0) throw new ErrorOrdersList("list of orders cannot be empty");
 
             idOrder++;
             Order orderPerson = new Order(idOrder, nameCustomer, orders);
             ordersList.add(orderPerson);
-            LOGGER.info("Create order: {} {}", orderPerson, Arrays.toString(orders));
+            LOGGER.info("Order is created: {} {}", orderPerson, Arrays.toString(orders));
 
-        } catch (ErrorNameCustomer | ErrorOrdersList e) {
+        } catch (ErrorCustomerName | ErrorOrdersList e) {
             LOGGER.error("Exception: {} {}", e.getMessage(), nameCustomer);
         }
     }
@@ -36,7 +36,7 @@ public class CoffeeOrderBoard {
         LOGGER.info("Deliver is working");
         if (!ordersList.isEmpty()) {
             Order firstOrder = ordersList.get(0);
-            LOGGER.info("Deliver order {}", firstOrder);
+            LOGGER.info("Order is delivered {}", firstOrder);
             ordersList.remove(0);
             return firstOrder;
         } else {
