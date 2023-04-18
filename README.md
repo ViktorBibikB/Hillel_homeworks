@@ -29,3 +29,4 @@
 29. [Lesson_39/Home_work_30](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_39_homework_30) - Branch for Lesson 39/Home work 30.
 30. [Lesson_40/Home_work_31](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_40_homework_31) - Branch for Lesson 40/Home work 31.
 31. [Lesson_41/Home_work_32](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_41_homework_32) - Branch for Lesson 41/Home work 32.
+32. [Lesson_42/Home_work_33](https://github.com/ViktorBibikB/Hillel_homeworks/tree/lesson_42_homework_33) - Branch for Lesson 42/Home work 33.
