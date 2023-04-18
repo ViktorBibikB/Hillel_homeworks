@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: ${MYSQL_URL}
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASS}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    org.springframework.web: INFO
+    demo: INFO
+  file:
+    name: myapplication.log
